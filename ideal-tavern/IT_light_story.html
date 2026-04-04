@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #e8e4de; display: flex; justify-content: center; align-items: flex-start; }
+
+  .it { width: 1080px; height: 1920px; background: #f5f1eb; position: relative; overflow: hidden; font-family: 'Barlow', sans-serif; flex-shrink: 0; }
+  .it-border { position: absolute; inset: 28px; border: 1.5px solid rgba(0,0,0,0.12); pointer-events: none; z-index: 3; }
+  .it-inner { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; padding: 56px 60px 50px; }
+
+  .it-logo-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; margin-bottom: 28px; }
+  .it-logo-wrap img { height: 140px; width: auto; }
+
+  .it-hr { width: 100%; height: 1.5px; background: rgba(0,0,0,0.12); flex-shrink: 0; }
+  .it-title { font-family: 'Playfair Display', serif; font-size: 88px; font-weight: 700; color: #1a1a18; text-align: center; padding: 24px 0; line-height: 1; flex-shrink: 0; }
+
+  .it-wing-bar { background: rgba(201,168,76,0.12); border: 1.5px solid rgba(201,168,76,0.6); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 22px 28px; margin: 20px 0 18px; flex-shrink: 0; gap: 10px; }
+  .it-wing-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #C9A84C; border: 1.5px solid #C9A84C; padding: 8px 16px; white-space: nowrap; }
+  .it-wing-name { font-family: 'Barlow Condensed', sans-serif; font-size: 60px; font-weight: 700; color: #1a1a18; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1; text-align: center; }
+
+  .it-label { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: #C9A84C; margin: 16px 0 10px; flex-shrink: 0; }
+
+  .it-starters { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; flex-shrink: 0; }
+  .it-starter-item { display: flex; align-items: baseline; gap: 16px; }
+  .it-sm-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #1a1a18; text-transform: uppercase; letter-spacing: 0.04em; font-size: 36px; }
+  .it-sm-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: #C9A84C; font-size: 36px; }
+  .it-sm-desc { font-family: 'Barlow', sans-serif; font-weight: 400; color: rgba(26,26,24,0.52); font-size: 26px; margin-top: 2px; margin-bottom: 4px; }
+
+  .it-entrees { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1; min-height: 0; }
+  .it-tile { border: 1.5px solid rgba(0,0,0,0.10); box-shadow: 0 2px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.8); background: rgba(255,255,255,0.6); padding: 30px 28px; display: flex; flex-direction: column; }
+  .it-tile-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #1a1a18; letter-spacing: 0.05em; text-transform: uppercase; font-size: 44px; line-height: 1.1; flex-shrink: 0; }
+  .it-tile-desc { font-family: 'Barlow', sans-serif; font-weight: 400; color: rgba(26,26,24,0.65); line-height: 1.45; margin-top: 12px; font-size: 28px; flex: 1; }
+  .it-tile-note { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: rgba(201,168,76,0.9); font-size: 24px; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .it-tile-price { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 700; color: #C9A84C; margin-top: 16px; line-height: 1; flex-shrink: 0; }
+
+  .it-dessert-row { display: flex; align-items: baseline; gap: 20px; margin-bottom: 4px; flex-shrink: 0; }
+  .it-dessert-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #1a1a18; text-transform: uppercase; letter-spacing: 0.04em; font-size: 36px; }
+  .it-dessert-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: #C9A84C; font-size: 36px; }
+
+  .it-cocktails { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 24px; margin-top: 16px; flex-shrink: 0; }
+  .it-ck-row { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+  .it-ck-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #1a1a18; letter-spacing: 0.03em; text-transform: uppercase; font-size: 28px; line-height: 1.2; }
+  .it-ck-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: #C9A84C; font-size: 28px; white-space: nowrap; }
+  .it-ck-desc { font-family: 'Barlow', sans-serif; font-weight: 400; color: rgba(26,26,24,0.52); line-height: 1.4; margin-top: 6px; font-size: 22px; }
+
+  .it-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; flex-shrink: 0; }
+  .it-footer-text { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; color: rgba(26,26,24,0.35); letter-spacing: 0.14em; text-transform: uppercase; }
+  .it-gold-dash { width: 40px; height: 1.5px; background: #C9A84C; }
+</style>
+</head>
+<body>
+<div class="it">
+  <div class="it-border"></div>
+  <div class="it-inner">
+
+    <div class="it-logo-wrap">
+      <img src="https://idealtavern.com/wp-content/uploads/2026/04/Ideal-Tavern-Transparent-Black-Logo.png" alt="Ideal Tavern">
+    </div>
+
+    <div class="it-hr"></div>
+    <div class="it-title">This Week's Specials</div>
+    <div class="it-hr"></div>
+
+    <div class="it-wing-bar">
+      <div class="it-wing-badge">Wing of the Week</div>
+      <div class="it-wing-name">Garlic Cherry Pepper</div>
+    </div>
+
+    <div class="it-label">Entrees</div>
+    <div class="it-entrees">
+      <div class="it-tile">
+        <div class="it-tile-name">Wild Berry Salad</div>
+        <div class="it-tile-desc">Baby spinach, arugula, red onion, wild berry balsamic vinaigrette, crumbled gorgonzola.</div>
+        <div class="it-tile-note">Chicken +6 &nbsp;|&nbsp; Shrimp +12</div>
+        <div class="it-tile-price">$16</div>
+      </div>
+      <div class="it-tile">
+        <div class="it-tile-name">Seafood Cioppino</div>
+        <div class="it-tile-desc">Garlic tomatoes, white wine, mussels, clams, shrimp, calamari, served with toasted sourdough.</div>
+        <div class="it-tile-price">$38</div>
+      </div>
+      <div class="it-tile">
+        <div class="it-tile-name">Linguine Fini Carbonara</div>
+        <div class="it-tile-desc">Sweet onion, English peas, crispy pancetta.</div>
+        <div class="it-tile-price">$24</div>
+      </div>
+      <div class="it-tile">
+        <div class="it-tile-name">Crispy Cod Brioche</div>
+        <div class="it-tile-desc">Shredded lettuce, coleslaw, housemade lemon tartar, house fries.</div>
+        <div class="it-tile-price">$18</div>
+      </div>
+    </div>
+
+    <div class="it-label">Dessert</div>
+    <div class="it-dessert-row">
+      <span class="it-dessert-name">Brownie Fudge Lava Cake</span>
+      <span class="it-dessert-price">$12</span>
+    </div>
+
+    <div class="it-label">Featured Cocktails</div>
+    <div class="it-cocktails">
+      <div>
+        <div class="it-ck-row"><span class="it-ck-name">Slippin on Chili</span><span class="it-ck-price">$14</span></div>
+        <div class="it-ck-desc">Spicy tequila, lemon, St. Germain, red pepper oil. Martini style.</div>
+      </div>
+      <div>
+        <div class="it-ck-row"><span class="it-ck-name">Rock the Chair</span><span class="it-ck-price">$12</span></div>
+        <div class="it-ck-desc">Four Roses bourbon, fresh lime, orgeat, blackberry.</div>
+      </div>
+      <div>
+        <div class="it-ck-row"><span class="it-ck-name">Dog Star</span><span class="it-ck-price">$10</span></div>
+        <div class="it-ck-desc">Tito's vodka, lemonade, hibiscus.</div>
+      </div>
+    </div>
+
+    <div class="it-hr" style="margin-top:20px;"></div>
+    <div class="it-footer">
+      <div class="it-footer-text">Idealtavern.com</div>
+      <div class="it-gold-dash"></div>
+      <div class="it-footer-text">142 Center St. Southington, CT</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
