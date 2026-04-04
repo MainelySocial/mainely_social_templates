@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #111; display: flex; justify-content: center; align-items: flex-start; }
+
+  .eck { width: 1080px; height: 1920px; background: #000000; position: relative; overflow: hidden; font-family: 'Barlow', sans-serif; flex-shrink: 0; }
+  .eck-border { position: absolute; inset: 28px; border: 1.5px solid rgba(255,255,255,0.16); pointer-events: none; z-index: 3; }
+  .eck-inner { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; padding: 56px 60px 50px; }
+
+  .eck-logo-wrap { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; margin-bottom: 28px; }
+  .eck-logo-wrap img { height: 160px; width: auto; }
+
+  .eck-hr { width: 100%; height: 1.5px; background: rgba(255,255,255,0.16); flex-shrink: 0; }
+  .eck-title { font-family: 'Playfair Display', serif; font-size: 88px; font-weight: 700; color: #f5f0e8; text-align: center; padding: 24px 0; line-height: 1; flex-shrink: 0; }
+
+  .eck-wing-bar { background: rgba(184,154,106,0.13); border: 1.5px solid rgba(184,154,106,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 28px; margin: 20px 0 18px; flex-shrink: 0; gap: 10px; }
+  .eck-wing-left { display: flex; align-items: center; gap: 22px; }
+  .eck-wing-badge { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #b89a6a; border: 1.5px solid #b89a6a; padding: 8px 16px; white-space: nowrap; }
+  .eck-wing-name { font-family: 'Barlow Condensed', sans-serif; font-size: 60px; font-weight: 700; color: #f5f0e8; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1; text-align: center; }
+  .eck-wing-sub { font-family: 'Barlow', sans-serif; font-size: 24px; font-weight: 400; color: rgba(245,240,232,0.55); margin-top: 4px; }
+  .eck-wing-arrow { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #b89a6a; text-align: right; white-space: nowrap; }
+
+  .eck-label { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.26em; text-transform: uppercase; color: #b89a6a; margin: 16px 0 10px; flex-shrink: 0; }
+
+  .eck-starters { display: flex; gap: 32px; margin-bottom: 16px; flex-shrink: 0; }
+  .eck-starter-col { flex: 1; }
+  .eck-starter-item { display: flex; align-items: baseline; gap: 12px; }
+  .eck-sm-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #f5f0e8; text-transform: uppercase; letter-spacing: 0.04em; font-size: 36px; }
+  .eck-sm-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: #b89a6a; font-size: 36px; white-space: nowrap; }
+  .eck-sm-desc { font-family: 'Barlow', sans-serif; font-weight: 400; color: rgba(245,240,232,0.52); font-size: 26px; margin-top: 2px; }
+
+  .eck-entrees { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; flex: 1; min-height: 0; }
+  .eck-tile { border: 1.5px solid rgba(255,255,255,0.14); box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.06); background: rgba(255,255,255,0.04); padding: 30px 28px; display: flex; flex-direction: column; }
+  .eck-tile-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #f5f0e8; letter-spacing: 0.05em; text-transform: uppercase; font-size: 44px; line-height: 1.1; flex-shrink: 0; }
+  .eck-tile-desc { font-family: 'Barlow', sans-serif; font-weight: 400; color: rgba(245,240,232,0.72); line-height: 1.45; margin-top: 12px; font-size: 28px; flex: 1; }
+  .eck-tile-note { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: rgba(184,154,106,0.8); font-size: 24px; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .eck-tile-add { font-family: 'Barlow', sans-serif; font-weight: 400; color: rgba(184,154,106,0.65); font-size: 24px; margin-top: 6px; }
+  .eck-tile-price { font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 700; color: #b89a6a; margin-top: 16px; line-height: 1; flex-shrink: 0; }
+
+  .eck-cocktails { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 24px; margin-top: 16px; flex-shrink: 0; }
+  .eck-ck-row { display: flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+  .eck-ck-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; color: #f5f0e8; letter-spacing: 0.03em; text-transform: uppercase; font-size: 28px; line-height: 1.2; }
+  .eck-ck-price { font-family: 'Barlow Condensed', sans-serif; font-weight: 600; color: #b89a6a; font-size: 28px; white-space: nowrap; }
+  .eck-ck-desc { font-family: 'Barlow', sans-serif; font-weight: 400; color: rgba(245,240,232,0.58); line-height: 1.4; margin-top: 6px; font-size: 22px; }
+
+  .eck-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; flex-shrink: 0; }
+  .eck-footer-text { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; color: rgba(245,240,232,0.32); letter-spacing: 0.14em; text-transform: uppercase; }
+  .eck-gold-dash { width: 40px; height: 1.5px; background: #b89a6a; }
+</style>
+</head>
+<body>
+<div class="eck">
+  <div class="eck-border"></div>
+  <div class="eck-inner">
+
+    <div class="eck-logo-wrap">
+      <img src="https://echocraftkitchen.com/wp-content/uploads/2022/05/Echo-Craft-Kitchen-bmindfulweb-Rectangle-Logo-Final-White.webp" alt="Echo Craft Kitchen" />
+    </div>
+
+    <div class="eck-hr"></div>
+    <div class="eck-title">This Week's Specials</div>
+    <div class="eck-hr"></div>
+
+    <div class="eck-wing-bar">
+      <div class="eck-wing-badge">Wing of the Week</div>
+      <div class="eck-wing-name">Spicy Sweet &amp; Sour</div>
+    </div>
+
+    <div class="eck-label">Starters</div>
+    <div class="eck-starters">
+      <div class="eck-starter-col">
+        <div class="eck-starter-item">
+          <span class="eck-sm-name">Soup of the Day</span>
+          <span class="eck-sm-price">8</span>
+        </div>
+        <div class="eck-sm-desc">Ask your server</div>
+      </div>
+      <div class="eck-starter-col">
+        <div class="eck-starter-item">
+          <span class="eck-sm-name">Eggplant Florentine Rollatini</span>
+          <span class="eck-sm-price">17</span>
+        </div>
+        <div class="eck-sm-desc">Breaded eggplant, whipped herb ricotta, baby spinach, marinara, mozzarella, garlic bread</div>
+      </div>
+    </div>
+
+    <div class="eck-label">Entrees</div>
+    <div class="eck-entrees">
+      <div class="eck-tile">
+        <div class="eck-tile-name">Balsamic &amp; Brie Burger</div>
+        <div class="eck-tile-desc">Half pound angus beef, melted Brie, balsamic cippolini onions, fresh baby kale.</div>
+        <div class="eck-tile-note">With house fries!</div>
+        <div class="eck-tile-price">$18</div>
+      </div>
+      <div class="eck-tile">
+        <div class="eck-tile-name">Pork Loin Saute</div>
+        <div class="eck-tile-desc">Pan seared pork loin, hot &amp; sweet peppers, spinach, fresh garlic, shallots, roasted potatoes, rich pan Demi.</div>
+        <div class="eck-tile-price">$28</div>
+      </div>
+      <div class="eck-tile" style="grid-column: 1 / -1;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div style="flex:1;">
+            <div class="eck-tile-name">Wedge Salad</div>
+            <div class="eck-tile-desc">Bacon, crumbled bleu cheese, tomato, red onion, bleu cheese dressing, fresh cracked black pepper.</div>
+            <div class="eck-tile-add">+ Chicken $6 &nbsp;|&nbsp; Shrimp $8 &nbsp;|&nbsp; Salmon $8</div>
+          </div>
+          <div class="eck-tile-price" style="margin-top:0; margin-left:32px;">$18</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="eck-label">Featured Cocktails</div>
+    <div class="eck-cocktails">
+      <div>
+        <div class="eck-ck-row"><span class="eck-ck-name">What the Fig</span><span class="eck-ck-price">14</span></div>
+        <div class="eck-ck-desc">Blanco tequila, honey, fig liqueur, fresh lime juice, fresh orange juice.</div>
+      </div>
+      <div>
+        <div class="eck-ck-row"><span class="eck-ck-name">The Last Flight</span><span class="eck-ck-price">15</span></div>
+        <div class="eck-ck-desc">Smokewagon straight bourbon, Aperol, Luxardo del santo, fresh lemon juice.</div>
+      </div>
+      <div>
+        <div class="eck-ck-row"><span class="eck-ck-name">Petal and Vine</span><span class="eck-ck-price">15</span></div>
+        <div class="eck-ck-desc">Crop cucumber vodka, St. Germain elderflower, prosecco, club soda, fresh cucumbers, mint, lemon.</div>
+      </div>
+    </div>
+
+    <div class="eck-hr" style="margin-top:20px;"></div>
+    <div class="eck-footer">
+      <div class="eck-footer-text">Echocraftkitchen.com</div>
+      <div class="eck-gold-dash"></div>
+      <div class="eck-footer-text">150 Echo Lake Rd. Watertown, CT</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
