@@ -28,7 +28,7 @@ mainely-social-templates/
 At the start of a specials session, Claude fetches the raw template files directly from this repo using the raw GitHub URL format:
 
 ```
-https://raw.githubusercontent.com/[username]/mainely-social-templates/main/[client-folder]/[filename]
+https://raw.githubusercontent.com/MainelySocial/mainely_social_templates/main/[client-folder]/[filename]
 ```
 
 Claude reads the template, accepts the weekly specials PDF upload, populates all sections with current menu content, and outputs production-ready HTML.
@@ -42,12 +42,14 @@ The Cowork workflow monitors each client's Google Drive incoming folder for a ne
 ---
 
 ## Claude Activation Keywords
-- `IT SPECIALS` — triggers Ideal Tavern weekly specials workflow
-- `ECK SPECIALS` — triggers Echo Craft Kitchen weekly specials workflow
+- **`IT SPECIALS`** -- triggers Ideal Tavern weekly specials workflow
+- **`ECK SPECIALS`** -- triggers Echo Craft Kitchen dark story workflow
+- **`ECK SPECIALS LIGHT`** -- triggers Echo Craft Kitchen light story workflow
 
 ---
 
 ## CloudConvert Settings (free account, no saved presets)
+
 | Format | Width | Height | Scale | Wait Until | Wait Time |
 |--------|-------|--------|-------|------------|-----------|
 | Story 9x16 | 1080 | 1920 | 1 | networkidle0 | 3000 |
@@ -68,9 +70,10 @@ When a template is revised:
 ## Access
 - **Repo:** Private
 - **Owner:** Mainely Social Inc.
+- **GitHub username:** MainelySocial
 - **Primary user:** Christian Yanarella
 - **Cowork auth:** GitHub Personal Access Token (stored in Cowork workflow settings)
-- **Claude access:** Raw URLs (no auth required for read on private repo via token)
+- **Claude access:** Raw URLs fetched at session start
 
 ---
 
